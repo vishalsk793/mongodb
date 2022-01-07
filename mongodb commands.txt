@@ -1,0 +1,43 @@
+//create database college1
+//create collection employee 
+use college1
+
+db.employee.insertMany([{"emp_name":"sameer","emp_address":"bijapur","emp_email_id":"sameer@gmail.com","emp_phone":9876545873,"emp_DOB":15-7-1999,"gender":"male","emp_department":"mca"}])   
+db.employee.insertOne({"emp_name":"vishal","emp_address":"hubli","emp_email_id":"vishal@yahoo.com","emp_phone":9876748434,"emp_DOB":21-2-2000,"gender":"male","emp_department":"cs"}) 
+db.employee.insertMany([{"emp_name":"pavan","emp_address":"hubli","emp_email_id":"pavan@yahoo.com","emp_phone":9076545873,"emp_DOB":ISODate("1999-10-08"),"gender":"male","emp_department":"Mech"}])
+db.employee.insertMany([{"emp_name":"blesson","emp_address":"bangalore","emp_email_id":"blesson@gmail.com","emp_phone":9876545873,"emp_DOB":ISODate("1999-10-07"),"gender":"male","emp_department":"civil"}])
+db.employee.insertMany([{"emp_name":"mary","emp_address":"dharwad","emp_email_id":"mary@gmail.com","emp_phone":8076545873,"emp_DOB":ISODate("1999-11-08"),"gender":"female","emp_department":"cs"}])
+
+//queries
+
+//to retrive all data
+db.employee.find()
+
+
+//to retrive some particular gender
+db.employee.find({"gender":"male"})
+db.employee.find({"gender":"female"})
+
+//to retrive mca departement
+db.employee.find({"emp_department":"mca"})
+
+//to retrive dob greater than 01-01-2000
+db.employee.find({"emp_DOB":{$gte: ISODate("2000-01-01")}})
+
+//to retrive email with yahoo.com domain
+db.employee.find({"emp_email_id":{$regex:("@yahoo.com")}})
+
+//to retrive name of employee name starts with letter m
+db.employee.find({"emp_name":{$regex:"^m"}})
+or 
+db.employee.find({"emp_name":{$regex:/^m/i}})    
+
+
+//to update data or change phone no.
+db.employee.update({"emp_name":"mary"},{$set:{"emp_phone":1111111111}})
+
+//to delete all records in collection
+db.employee.deleteMany()
+
+//to delete particular record in collection
+//db.employee.deleteOne({"emp_name":"mary"})
